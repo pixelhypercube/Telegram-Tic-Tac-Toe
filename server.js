@@ -404,6 +404,6 @@ app.get("/",(req,res)=>{
     res.status(200).json({"Um":"Hi?"});
 });
 
-app.listen(3000,"0.0.0.0",()=>{
+app.listen(3000,()=>{
     console.log(`Server now listening on: https:0.0.0.0:3000`);
 });
