@@ -6,9 +6,9 @@ let TicTacToe = require("./TicTacToe.js");
 
 const TelegramBot = require("node-telegram-bot-api");
 // const process = require("dotenv");
-if (process.env.NODE_ENV !== 'production') {
-    require('dotenv').config();
-}
+// if (process.env.NODE_ENV !== 'production') {
+//     require('dotenv').config();
+// }
 const botToken = process.env.BOT_TOKEN;
 
 const bot = new TelegramBot(botToken,{polling:true});
