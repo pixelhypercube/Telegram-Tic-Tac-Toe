@@ -250,6 +250,8 @@ If you want to quit, type /quit in the chat!
                                     canContinue = false;
                                 }
                                 break;
+                            default:
+                                bot.sendMessage(chatId,"Enter a value between 1-9");
                         }
                         // if (canContinue) {
                         //     gameObjList[i].printBoard(chatId,bot);
@@ -264,7 +266,6 @@ If you want to quit, type /quit in the chat!
                                         one_time_keyboard:true
                                     }
                                 });
-                                // gameObjList[i].printBoard(chatId,bot);
                                 gameObjList.splice(i,1);
                             } else {
                                 if (canContinue) {
@@ -277,6 +278,7 @@ If you want to quit, type /quit in the chat!
                                             ry = Math.floor(Math.random()*3);
                                         }
                                     } else {
+                                        gameObjList[i].printBoard(chatId,bot);
                                         bot.sendMessage(chatId,"It's a tie!\n Thanks for playing my Tic Tac Toe game!\n Github Project Link: https://github.com/pixelhypercube/Telegram-Tic-Tac-Toe \n Type /start again to start a new game!",{
                                             'reply_markup':{
                                                 'keyboard':[['/start']],
@@ -285,9 +287,19 @@ If you want to quit, type /quit in the chat!
                                             }
                                         });
                                         gameObjList.splice(i,1);
+                                        canContinue = false;
                                     }
-                                    gameObjList[i].setCell(rx,ry,gameObjList[i].player_2_symbol);
-                                    gameObjList[i].printBoard(chatId,bot);
+                                    if (canContinue) {
+                                        gameObjList[i].setCell(rx,ry,gameObjList[i].player_2_symbol);
+                                        gameObjList[i].printBoard(chatId,bot);
+                                    }
+                                    // bot.sendMessage(chatId,"Your turn next!",{
+                                    //     'reply_markup':{
+                                    //         'keyboard':[['1','2','3'],['4','5','6'],['7','8','9']],
+                                    //         resize_keyboard:true,
+                                    //         one_time_keyboard:true
+                                    //     }
+                                    // });
                                     if (gameObjList[i].checkWin()) {
                                         bot.sendMessage(chatId,"CPU won the game!\n Thanks for playing my Tic Tac Toe game!\n Github Project Link: https://github.com/pixelhypercube/Telegram-Tic-Tac-Toe \n Type /start again to start a new game!",{
                                             'reply_markup':{
@@ -337,8 +349,15 @@ If you want to quit, type /quit in the chat!
                                             gameObjList[i].changePlayer();
                                         }
                                         gameObjList[i].printBoard(chatId,bot);
-                                        bot.sendMessage(chatId,`Player ${gameObjList[i].selected_player}'s turn`);
+                                        bot.sendMessage(chatId,`Player ${gameObjList[i].selected_player}'s turn`,{
+                                            'reply_markup':{
+                                                'keyboard':[['1','2','3'],['4','5','6'],['7','8','9']],
+                                                resize_keyboard:true,
+                                                one_time_keyboard:true
+                                            }
+                                        });
                                     } else {
+                                        gameObjList[i].printBoard(chatId,bot);
                                         bot.sendMessage(chatId,"It's a tie!\n Thanks for playing my Tic Tac Toe game!\n Github Project Link: https://github.com/pixelhypercube/Telegram-Tic-Tac-Toe \n Type /start again to start a new game!",
                                         {
                                             'reply_markup':{
