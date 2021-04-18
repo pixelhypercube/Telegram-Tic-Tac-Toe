@@ -405,5 +405,5 @@ app.get("/",(req,res)=>{
 });
 
 app.listen(3000,()=>{
-    console.log(`Server now listening on: https:0.0.0.0:3000`);
+    console.log(`Server now listening on: https://0.0.0.0:3000`);
 });
