@@ -20,7 +20,9 @@ bot.onText(/\/quit/g,(msg,match)=>{
     for (let i = 0;i<gameObjList.length;i++) {
         if (msg.from.id==gameObjList[i].id) {
             gameObjList.splice(i,1);
-            bot.sendMessage(chatId,"*Thanks for playing my Tic Tac Toe game!\n Github Project Link: https://github.com/pixelhypercube/Telegram-Tic-Tac-Toe  Game!*\n Link to Github Project - https://github.com/pixelhypercube/Telegram-Tic-Tac-Toe")
+            bot.sendMessage(chatId,"*Thanks for playing my Tic Tac Toe game!*\n Github Project Link: https://github.com/pixelhypercube/Telegram-Tic-Tac-Toe  Game!\n Link to Github Project - https://github.com/pixelhypercube/Telegram-Tic-Tac-Toe",{
+                parse_mode:"Markdown"
+            })
         }
     }
 });
@@ -301,12 +303,13 @@ If you want to quit, type /quit in the chat!
                                     //     }
                                     // });
                                     if (gameObjList[i].checkWin()) {
-                                        bot.sendMessage(chatId,"CPU won the game!\n Thanks for playing my Tic Tac Toe game!\n Github Project Link: https://github.com/pixelhypercube/Telegram-Tic-Tac-Toe \n Type /start again to start a new game!",{
+                                        bot.sendMessage(chatId,"*CPU won the game!*\n Thanks for playing my Tic Tac Toe game!\n Github Project Link: https://github.com/pixelhypercube/Telegram-Tic-Tac-Toe \n Type /start again to start a new game!",{
                                             'reply_markup':{
                                                 'keyboard':[['/start']],
                                                 resize_keyboard:true,
                                                 one_time_keyboard:true
-                                            }
+                                            },
+                                            parse_mode:"Markdown"
                                         });
                                         gameObjList.splice(i,1);
                                     }
@@ -358,13 +361,14 @@ If you want to quit, type /quit in the chat!
                                         });
                                     } else {
                                         gameObjList[i].printBoard(chatId,bot);
-                                        bot.sendMessage(chatId,"It's a tie!\n Thanks for playing my Tic Tac Toe game!\n Github Project Link: https://github.com/pixelhypercube/Telegram-Tic-Tac-Toe \n Type /start again to start a new game!",
+                                        bot.sendMessage(chatId,"*It's a tie!*\n Thanks for playing my Tic Tac Toe game!\n Github Project Link: https://github.com/pixelhypercube/Telegram-Tic-Tac-Toe \n Type /start again to start a new game!",
                                         {
                                             'reply_markup':{
                                                 'keyboard':[['/start']],
                                                 resize_keyboard:true,
                                                 one_time_keyboard:true
-                                            }
+                                            },
+                                            parse_mode:"Markdown"
                                         });
                                         gameObjList.splice(i,1);
                                     }
@@ -405,5 +409,5 @@ app.get("/",(req,res)=>{
 });
 
 app.listen(3000,()=>{
-    console.log(`Server now listening on: https://0.0.0.0:3000`);
+    console.log(`Server now listening on: https://phc-tic-tac-toe-bot.herokuapp.com:3000`);
 });
