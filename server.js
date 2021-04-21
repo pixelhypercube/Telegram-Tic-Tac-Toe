@@ -58,7 +58,7 @@ Choose a game mode!
         gameObjList.push(new TicTacToe(id,is_bot,first_name,last_name,language_code));
         // gameObjList[gameObjList]
         var string = `
-        *Welcome to PixelHyperCube's Tic Tac Toe Game!*
+*Welcome to PixelHyperCube's Tic Tac Toe Game!*
 Choose a game mode!
 1. Player vs CPU (enter 1)
 2. Player vs Player (enter 2)
@@ -123,9 +123,10 @@ Choose a game mode!
                                 });
                                 gameObjList[i].selectSymbol();
                             }
-                        } else {
-                            bot.sendMessage(chatId,`Choose a game mode! \n1. Player vs CPU (enter 1) - The position of the CPU will be automatically filled \n2. Player vs Player (enter 2) - Requires two people to play`);
-                        }
+                        } 
+                        // else {
+                        //     bot.sendMessage(chatId,`Choose a game mode! \n1. Player vs CPU (enter 1) - The position of the CPU will be automatically filled \n2. Player vs Player (enter 2) - Requires two people to play`);
+                        // }
                     } catch {
                         bot.sendMessage(chatId,`Choose a game mode! \n1. Player vs CPU (enter 1) \n2. Player vs Player (enter 2)`);
                     }
@@ -261,12 +262,13 @@ If you want to quit, type /quit in the chat!
                         if (gameObjList[i].gamemode==1) {
                             if (gameObjList[i].checkWin()) {
                                 gameObjList[i].printBoard(chatId,bot);
-                                bot.sendMessage(chatId,"You won the game!\n Thanks for playing my Tic Tac Toe game!\n Github Project Link: https://github.com/pixelhypercube/Telegram-Tic-Tac-Toe \n Type /start again to start a new game!",{
+                                bot.sendMessage(chatId,"*You won the game!*\n Thanks for playing my Tic Tac Toe game!\n Github Project Link: https://github.com/pixelhypercube/Telegram-Tic-Tac-Toe \n Type /start again to start a new game!",{
                                     'reply_markup':{
                                         'keyboard':[['/start']],
                                         resize_keyboard:true,
                                         one_time_keyboard:true
-                                    }
+                                    },
+                                    parse_mode:"Markdown"
                                 });
                                 gameObjList.splice(i,1);
                             } else {
@@ -281,12 +283,13 @@ If you want to quit, type /quit in the chat!
                                         }
                                     } else {
                                         gameObjList[i].printBoard(chatId,bot);
-                                        bot.sendMessage(chatId,"It's a tie!\n Thanks for playing my Tic Tac Toe game!\n Github Project Link: https://github.com/pixelhypercube/Telegram-Tic-Tac-Toe \n Type /start again to start a new game!",{
+                                        bot.sendMessage(chatId,"*It's a tie!*\n Thanks for playing my Tic Tac Toe game!\n Github Project Link: https://github.com/pixelhypercube/Telegram-Tic-Tac-Toe \n Type /start again to start a new game!",{
                                             'reply_markup':{
                                                 'keyboard':[['/start']],
                                                 resize_keyboard:true,
                                                 one_time_keyboard:true
-                                            }
+                                            },
+                                            parse_mode:"Markdown"
                                         });
                                         gameObjList.splice(i,1);
                                         canContinue = false;
@@ -376,7 +379,7 @@ If you want to quit, type /quit in the chat!
                             } 
                         }
                     } catch {
-                        bot.sendMessage(chatId,"Enter a number from 1-9");
+                        // bot.sendMessage(chatId,"Enter a number from 1-9");
                     }
                     
                 }
@@ -405,7 +408,7 @@ bot.onText(/[^123456789XOxo]/g,(msg)=>{
 })
 
 app.get("/",(req,res)=>{
-    res.status(200).json({"Um":"Hi?"});
+    res.status(200).json({"Hey":"There"});
 });
 
 app.listen(3000,()=>{
