@@ -2,10 +2,8 @@ const express = require("express");
 const app = express();
 
 let TicTacToe = require("./TicTacToe.js");
-// let User = require("./User.js");
 
 const TelegramBot = require("node-telegram-bot-api");
-// const process = require("dotenv");
 if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config();
 }
@@ -53,10 +51,8 @@ Choose a game mode!
             }
         }
     } else {
-        // gameObjList.push(Object.assign(User,msg["from"]));
         var {id,is_bot,first_name,last_name,language_code} = msg.from;
         gameObjList.push(new TicTacToe(id,is_bot,first_name,last_name,language_code));
-        // gameObjList[gameObjList]
         var string = `
 *Welcome to PixelHyperCube's Tic Tac Toe Game!*
 Choose a game mode!
@@ -69,7 +65,6 @@ Choose a game mode!
             resize_keyboard:true,
             one_time_keyboard:true
         }});
-        // gameObjList[i].init();
     }
     
     bot.sendMessage(chatId,resp);
@@ -256,9 +251,6 @@ If you want to quit, type /quit in the chat!
                             default:
                                 bot.sendMessage(chatId,"Enter a value between 1-9");
                         }
-                        // if (canContinue) {
-                        //     gameObjList[i].printBoard(chatId,bot);
-                        // }
                         if (gameObjList[i].gamemode==1) {
                             if (gameObjList[i].checkWin()) {
                                 gameObjList[i].printBoard(chatId,bot);
@@ -273,7 +265,6 @@ If you want to quit, type /quit in the chat!
                                 gameObjList.splice(i,1);
                             } else {
                                 if (canContinue) {
-                                    // gameObjList[i].printBoard(chatId,bot);
                                     var rx = Math.floor(Math.random()*3);
                                     var ry = Math.floor(Math.random()*3);
                                     if (!gameObjList[i].checkIfAllAreFull()) {
@@ -298,13 +289,6 @@ If you want to quit, type /quit in the chat!
                                         gameObjList[i].setCell(rx,ry,gameObjList[i].player_2_symbol);
                                         gameObjList[i].printBoard(chatId,bot);
                                     }
-                                    // bot.sendMessage(chatId,"Your turn next!",{
-                                    //     'reply_markup':{
-                                    //         'keyboard':[['1','2','3'],['4','5','6'],['7','8','9']],
-                                    //         resize_keyboard:true,
-                                    //         one_time_keyboard:true
-                                    //     }
-                                    // });
                                     if (gameObjList[i].checkWin()) {
                                         bot.sendMessage(chatId,"*CPU won the game!*\n Thanks for playing my Tic Tac Toe game!\n Github Project Link: https://github.com/pixelhypercube/Telegram-Tic-Tac-Toe \n Type /start again to start a new game!",{
                                             'reply_markup':{
@@ -316,27 +300,8 @@ If you want to quit, type /quit in the chat!
                                         });
                                         gameObjList.splice(i,1);
                                     }
-                                    /* setTimeout(()=>{
-                                        gameObjList[i].setCell(rx,ry,gameObjList[i].player_2_symbol);
-                                        gameObjList[i].printBoard(chatId,bot);
-                                        if (gameObjList[i].checkWin()) {
-                                            bot.sendMessage(chatId,"CPU won the game!\n Thanks for playing my Tic Tac Toe game!\n Github Project Link: https://github.com/pixelhypercube/Telegram-Tic-Tac-Toe \n Type /start again to start a new game!");
-                                            gameObjList.splice(i,1);
-                                        }
-                                    },750); */
                                 }
-                            }
-                            // var rn = Math.floor(Math.random()*9+1);
-                            // let index = 0;
-                            // while (gameObjList[i].board[index]!="-" && index<=9) {
-                            //     rn = Math.floor(Math.random()*9+1);
-                            //     index++;
-                            //     console.log()
-                            // }
-                            // var coords = getCellCoords(rn);
-                            // console.log(coords);
-                            
-                            
+                            }                            
                         } else {
                             if (gameObjList[i].gamemode==2) {
                                 if (gameObjList[i].checkWin()) {
@@ -411,6 +376,6 @@ app.get("/",(req,res)=>{
     res.status(200).json({"Hey":"There"});
 });
 
-app.listen(3000,()=>{
+app.listen(process.env.PORT,()=>{
     console.log(`Server now listening on: https://phc-tic-tac-toe-bot.herokuapp.com:3000`);
 });
