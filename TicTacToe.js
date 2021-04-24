@@ -45,7 +45,14 @@ Choose a game mode!
         */
         for (let i = 0;i<this.board.length;i++) {
             for (let j = 0;j<this.board[i].length;j++) {
-                outputTxt += `${this.board[i][j]} `;
+                if (this.board[i][j]=="O") {
+                    outputTxt += `⭕ `;
+                } else if (this.board[i][j]=="X") {
+                    outputTxt += `❌ `;
+                } else if (this.board[i][j]=="-") {
+                    outputTxt += `➖ `;
+                }
+                // outputTxt += `${this.board[i][j]} `;
             }
             outputTxt += "\n";
         }
