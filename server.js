@@ -18,7 +18,7 @@ bot.onText(/\/quit/g,(msg,match)=>{
     for (let i = 0;i<gameObjList.length;i++) {
         if (msg.from.id==gameObjList[i].id) {
             gameObjList.splice(i,1);
-            bot.sendMessage(chatId,"*Thanks for playing my Tic Tac Toe game!*\n Github Project Link: https://github.com/pixelhypercube/Telegram-Tic-Tac-Toe  Game!\n Link to Github Project - https://github.com/pixelhypercube/Telegram-Tic-Tac-Toe \n Type /start again to start a new game!",{
+            bot.sendMessage(chatId,"*Thanks for your interest in my Tic Tac Toe game!*\n Github Project Link: https://github.com/pixelhypercube/Telegram-Tic-Tac-Toe  Game!\n Link to Github Project - https://github.com/pixelhypercube/Telegram-Tic-Tac-Toe \n Type /start again to start a new game!",{
                 parse_mode:"Markdown"
             });
         }
@@ -39,9 +39,9 @@ P.S. Since this bot is in it's beta stages of development, some of the functions
 Sorry for any inconveniences caused! Hope you have fun playing!                
 
 𝑪𝒉𝒐𝒐𝒔𝒆 𝒂 𝒈𝒂𝒎𝒆 𝒎𝒐𝒅𝒆!
-1. Player vs CPU (1 Player)
+*1. Player vs CPU (1 Player)*
 - You'll be playing against a CPU where it will place symbols after you've inserted something in a cell
-2. Player vs Player - (2 Players)
+*2. Player vs Player - (2 Players)*
 - Each player will take turns to place the symbols on the grid.
 For instance, Player 1 will place their symbol first, followed by Player 2.
 
@@ -70,10 +70,10 @@ P.S. Since this bot is in it's beta stages of development, some of the functions
 Sorry for any inconveniences caused! Hope you have fun playing!
 
 𝑪𝒉𝒐𝒐𝒔𝒆 𝒂 𝒈𝒂𝒎𝒆 𝒎𝒐𝒅𝒆!
-1. Player vs CPU (1 Player)
+*1. Player vs CPU (1 Player)*
 - You'll be playing against a CPU where it will place symbols after you've inserted something in a cell
 - The CPU will instantly place the symbol after you've inserted your symbol
-2. Player vs Player - (2 Players)
+*2. Player vs Player - (2 Players)*
 - Each player will take turns to place the symbols on the grid.
 - For instance, Player 1 will place their symbol first, followed by Player 2.
 
@@ -114,9 +114,9 @@ bot.onText(/[123456789XOxo]/g,(msg,match)=>{
                             } else {
                                 bot.sendMessage(chatId,`
 𝑪𝒉𝒐𝒐𝒔𝒆 𝒂 𝒈𝒂𝒎𝒆 𝒎𝒐𝒅𝒆!
-1. Player vs CPU (1 Player)
+*1. Player vs CPU (1 Player)*
 - You'll be playing against a CPU where it will place symbols after you've inserted something in a cell
-2. Player vs Player - (2 Players)
+*2. Player vs Player - (2 Players)*
 - Each player will take turns to place the symbols on the grid.
 For instance, Player 1 will place their symbol first, followed by Player 2.
                                 `,{
@@ -124,7 +124,8 @@ For instance, Player 1 will place their symbol first, followed by Player 2.
                                         'keyboard':[['1 - Player vs CPU','2 - Player vs Player'],['/quit']],
                                         resize_keyboard:true,
                                         one_time_keyboard:true
-                                    }
+                                    },
+                                    parse_mode:"Markdown"
                                 });
                             }
                             
@@ -297,7 +298,7 @@ Player 2's symbol - ${gameObjList[i].player_2_symbol}`)
                         if (gameObjList[i].gamemode==1) {
                             if (gameObjList[i].checkWin()) {
                                 gameObjList[i].printBoard(chatId,bot);
-                                bot.sendMessage(chatId,"*𝕐𝕠𝕦 𝕨𝕠𝕟 𝕥𝕙𝕖 𝕘𝕒𝕞𝕖!*\n Thanks for playing my Tic Tac Toe game!\n Github Project Link: https://github.com/pixelhypercube/Telegram-Tic-Tac-Toe \n Type /start again to start a new game!",{
+                                bot.sendMessage(chatId,"*𝕐𝕠𝕦 𝕨𝕠𝕟 𝕥𝕙𝕖 𝕘𝕒𝕞𝕖!*\n Thanks for playing my Tic Tac Toe game!\n---\n Github Project Link: https://github.com/pixelhypercube/Telegram-Tic-Tac-Toe \n Type /start again to start a new game!",{
                                     'reply_markup':{
                                         'keyboard':[['/start']],
                                         resize_keyboard:true,
