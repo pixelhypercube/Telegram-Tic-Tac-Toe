@@ -426,7 +426,7 @@ bot.onText(/\/serverstats/g,(msg)=>{
     const chatId = msg.chat.id;
     bot.sendMessage(chatId,`
 *Server Stats*
-Players online: ${gameObjList.length}
+Players in-game: ${gameObjList.length}
     `,{
         'reply_markup':{
             'keyboard':[['/start']],
