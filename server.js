@@ -422,6 +422,20 @@ bot.onText(/[^123456789XOxo]/g,(msg)=>{
     }
 });
 
+bot.onText(/\/serverstats/g,(msg)=>{
+    const chatId = msg.chat.id;
+    bot.sendMessage(chatId,`
+*Server Stats*
+Players online: ${gameObjList.length}
+    `,{
+        'reply_markup':{
+            'keyboard':[['/start']],
+            resize_keyboard:true,
+            one_time_keyboard:true
+        }
+    });
+})
+
 app.get("/",(req,res)=>{
     res.status(200).json({"Hey":"There"});
 });
