@@ -137,7 +137,7 @@ For instance, Player 1 will place their symbol first, followed by Player 2.
                                 bot.sendMessage(chatId,string,{
                                     parse_mode:"Markdown",
                                     'reply_markup':{
-                                        'keyboard':[['❌','⭕️'],['/quit']],
+                                        'keyboard':[['X','O'],['/quit']],
                                         resize_keyboard:true,
                                         one_time_keyboard:true
                                     }
@@ -152,17 +152,24 @@ For instance, Player 1 will place their symbol first, followed by Player 2.
                         bot.sendMessage(chatId,`Choose a game mode! \n1. Player vs CPU (enter 1) \n2. Player vs Player (enter 2)`);
                     }
                 } else if (gameObjList[i].game_stage=="symbol_selection") {
-                    if (msg.text.toUpperCase()=="X" || msg.text=="❌") {
+                    if (msg.text.toUpperCase()=="X") {
                         gameObjList[i].player_1_symbol = "X";
                         gameObjList[i].player_2_symbol = "O";
-                    } else if (msg.text.toUpperCase()=="O" || msg.text=="⭕️") {
+                    } else if (msg.text.toUpperCase()=="O") {
                         gameObjList[i].player_1_symbol = "O";
                         gameObjList[i].player_2_symbol = "X";
                     } else {
                         var string = `
                         Select a symbol:\n❌\n⭕️
                         `;
-                        bot.sendMessage(chatId,string);
+                        bot.sendMessage(chatId,string,{
+                            parse_mode:"Markdown",
+                            'reply_markup':{
+                                'keyboard':[['X','O'],['/quit']],
+                                resize_keyboard:true,
+                                one_time_keyboard:true
+                            }
+                        });
                         gameObjList[i].selectSymbol(chatId,bot);
                     }
                     if (gameObjList[i].player_1_symbol!=null && gameObjList[i].player_2_symbol!=null) {
