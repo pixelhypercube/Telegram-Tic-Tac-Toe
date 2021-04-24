@@ -37,14 +37,14 @@ bot.onText(/\/start/g,(msg,match)=>{
 *𝑾𝒆𝒍𝒄𝒐𝒎𝒆 𝒕𝒐 𝑷𝒊𝒙𝒆𝒍𝑯𝒚𝒑𝒆𝒓𝑪𝒖𝒃𝒆'𝒔 𝑻𝒊𝒄 𝑻𝒂𝒄 𝑻𝒐𝒆 𝑮𝒂𝒎𝒆 (𝒃𝒆𝒕𝒂)!*
 P.S. Since this bot is in it's beta stages of development, some of the functions may not be fully able to work well.
 Sorry for any inconveniences caused! Hope you have fun playing!                
-
+-----
 𝑪𝒉𝒐𝒐𝒔𝒆 𝒂 𝒈𝒂𝒎𝒆 𝒎𝒐𝒅𝒆!
 *1. Player vs CPU (1 Player)*
 - You'll be playing against a CPU where it will place symbols after you've inserted something in a cell
 *2. Player vs Player - (2 Players)*
 - Each player will take turns to place the symbols on the grid.
 For instance, Player 1 will place their symbol first, followed by Player 2.
-
+-----
 𝘾𝙤𝙢𝙢𝙖𝙣𝙙𝙨:
 /start - Starts a new game
 /quit - Quits the game and takes you out of the game
@@ -68,7 +68,7 @@ For instance, Player 1 will place their symbol first, followed by Player 2.
 *𝑾𝒆𝒍𝒄𝒐𝒎𝒆 𝒕𝒐 𝑷𝒊𝒙𝒆𝒍𝑯𝒚𝒑𝒆𝒓𝑪𝒖𝒃𝒆'𝒔 𝑻𝒊𝒄 𝑻𝒂𝒄 𝑻𝒐𝒆 𝑮𝒂𝒎𝒆 (𝒃𝒆𝒕𝒂)!*
 P.S. Since this bot is in it's beta stages of development, some of the functions may not be fully able to work well.
 Sorry for any inconveniences caused! Hope you have fun playing!
-
+-----
 𝑪𝒉𝒐𝒐𝒔𝒆 𝒂 𝒈𝒂𝒎𝒆 𝒎𝒐𝒅𝒆!
 *1. Player vs CPU (1 Player)*
 - You'll be playing against a CPU where it will place symbols after you've inserted something in a cell
@@ -76,7 +76,7 @@ Sorry for any inconveniences caused! Hope you have fun playing!
 *2. Player vs Player - (2 Players)*
 - Each player will take turns to place the symbols on the grid.
 - For instance, Player 1 will place their symbol first, followed by Player 2.
-
+-----
 𝘾𝙤𝙢𝙢𝙖𝙣𝙙𝙨:
 /start - Starts a new game
 /quit - Quits the game and takes you out of the game
@@ -114,8 +114,12 @@ bot.onText(/[123456789XOxo]/g,(msg,match)=>{
                             } else {
                                 bot.sendMessage(chatId,`
 𝑪𝒉𝒐𝒐𝒔𝒆 𝒂 𝒈𝒂𝒎𝒆 𝒎𝒐𝒅𝒆!
+-----
 *1. Player vs CPU (1 Player)*
 - You'll be playing against a CPU where it will place symbols after you've inserted something in a cell
+
+-----
+
 *2. Player vs Player - (2 Players)*
 - Each player will take turns to place the symbols on the grid.
 For instance, Player 1 will place their symbol first, followed by Player 2.
@@ -298,7 +302,7 @@ Player 2's symbol - ${gameObjList[i].player_2_symbol}`)
                         if (gameObjList[i].gamemode==1) {
                             if (gameObjList[i].checkWin()) {
                                 gameObjList[i].printBoard(chatId,bot);
-                                bot.sendMessage(chatId,"*𝕐𝕠𝕦 𝕨𝕠𝕟 𝕥𝕙𝕖 𝕘𝕒𝕞𝕖!*\n Thanks for playing my Tic Tac Toe game!\n---\n Github Project Link: https://github.com/pixelhypercube/Telegram-Tic-Tac-Toe \n Type /start again to start a new game!",{
+                                bot.sendMessage(chatId,"*𝐘𝐨𝐮 𝐰𝐨𝐧 𝐭𝐡𝐞 𝐠𝐚𝐦𝐞!*\n Thanks for playing my Tic Tac Toe game!\n---\n Github Project Link: https://github.com/pixelhypercube/Telegram-Tic-Tac-Toe \n Type /start again to start a new game!",{
                                     'reply_markup':{
                                         'keyboard':[['/start']],
                                         resize_keyboard:true,
@@ -318,7 +322,7 @@ Player 2's symbol - ${gameObjList[i].player_2_symbol}`)
                                         }
                                     } else {
                                         gameObjList[i].printBoard(chatId,bot);
-                                        bot.sendMessage(chatId,"*𝕀𝕥'𝕤 𝕒 𝕥𝕚𝕖!*\n Thanks for playing my Tic Tac Toe game!\n Github Project Link: https://github.com/pixelhypercube/Telegram-Tic-Tac-Toe \n Type /start again to start a new game!",{
+                                        bot.sendMessage(chatId,"*𝐈𝐭'𝐬 𝐚 𝐭𝐢𝐞!*\n-----\n Thanks for playing my Tic Tac Toe game!\n-----\n Github Project Link: https://github.com/pixelhypercube/Telegram-Tic-Tac-Toe \n-----\n Type /start again to start a new game!",{
                                             'reply_markup':{
                                                 'keyboard':[['/start']],
                                                 resize_keyboard:true,
@@ -334,7 +338,7 @@ Player 2's symbol - ${gameObjList[i].player_2_symbol}`)
                                         gameObjList[i].printBoard(chatId,bot);
                                     }
                                     if (gameObjList[i].checkWin()) {
-                                        bot.sendMessage(chatId,"*ℂℙ𝕌 𝕨𝕠𝕟 𝕥𝕙𝕖 𝕘𝕒𝕞𝕖!*\n Thanks for playing my Tic Tac Toe game!\n Github Project Link: https://github.com/pixelhypercube/Telegram-Tic-Tac-Toe \n Type /start again to start a new game!",{
+                                        bot.sendMessage(chatId,"*𝐂𝐏𝐔 𝐰𝐨𝐧 𝐭𝐡𝐞 𝐠𝐚𝐦𝐞!*\n-----\n Thanks for playing my Tic Tac Toe game!\n-----\n Github Project Link: https://github.com/pixelhypercube/Telegram-Tic-Tac-Toe \n-----\n Type /start again to start a new game!",{
                                             'reply_markup':{
                                                 'keyboard':[['/start']],
                                                 resize_keyboard:true,
@@ -349,7 +353,7 @@ Player 2's symbol - ${gameObjList[i].player_2_symbol}`)
                         } else {
                             if (gameObjList[i].gamemode==2) {
                                 if (gameObjList[i].checkWin()) {
-                                    bot.sendMessage(chatId,`*Player ${gameObjList[i].selected_player} won the game!*\n Thanks for playing my Tic Tac Toe game!\n Github Project Link: https://github.com/pixelhypercube/Telegram-Tic-Tac-Toe \n Type /start again to start a new game!`,{
+                                    bot.sendMessage(chatId,`*Player ${gameObjList[i].selected_player} won the game!*\n-----\n Thanks for playing my Tic Tac Toe game!\n-----\n Github Project Link: https://github.com/pixelhypercube/Telegram-Tic-Tac-Toe \n-----\n Type /start again to start a new game!`,{
                                         'reply_markup':{
                                             'keyboard':[['/start']],
                                             resize_keyboard:true,
@@ -375,7 +379,7 @@ Player 2's symbol - ${gameObjList[i].player_2_symbol}`)
                                         });
                                     } else {
                                         gameObjList[i].printBoard(chatId,bot);
-                                        bot.sendMessage(chatId,"*𝕀𝕥'𝕤 𝕒 𝕥𝕚𝕖!*\n Thanks for playing my Tic Tac Toe game!\n Github Project Link: https://github.com/pixelhypercube/Telegram-Tic-Tac-Toe \n Type /start again to start a new game!",
+                                        bot.sendMessage(chatId,"*𝐈𝐭'𝐬 𝐚 𝐭𝐢𝐞!*\n-----\n Thanks for playing my Tic Tac Toe game!\n-----\n Github Project Link: https://github.com/pixelhypercube/Telegram-Tic-Tac-Toe \n-----\n Type /start again to start a new game!",
                                         {
                                             'reply_markup':{
                                                 'keyboard':[['/start']],
