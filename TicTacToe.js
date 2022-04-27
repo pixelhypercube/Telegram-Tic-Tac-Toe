@@ -74,6 +74,7 @@ Choose a game mode!
     });
     }
     checkWin() {
+
         // Check row
         var player1Count = 0;
         var player2Count = 0;
@@ -93,7 +94,6 @@ Choose a game mode!
                     }
                 }
             }
-            
         }
         // Check col
         for (let i = 0;i<3;i++) {

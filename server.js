@@ -93,6 +93,134 @@ Sorry for any inconveniences caused! Hope you have fun playing!
     bot.sendMessage(chatId,resp);
 });
 
+// Minimax algorithm
+
+function isMovesLeft(gameObj) {
+    var board = gameObj.board;
+    for (let i = 0;i<3;i++) {
+        for (let j = 0;j<3;j++) {
+            if (board[i][j] == "-") {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+function evaluate(gameObj) {
+    var board = gameObj.board;
+    var player = gameObj.player_1_symbol;
+    var opponent = gameObj.player_2_symbol;
+    // Check rows
+    for (let row = 0;row<3;row++) {
+        if (board[row][0] == board[row][1] && board[row][1] == board[row][2]) {
+            if (board[row][0] == player) {
+                return 10;
+            } else if (board[row][0]  == opponent) {
+                return -10;
+            }
+        }
+    }
+    // Check cols
+    for(let col = 0; col<3; col++) {
+        if (board[0][col] == board[1][col] && board[1][col] == board[2][col]) {
+            if (board[0][col] == player) {
+                return 10;
+            } else if (board[0][col] == opponent) {
+                return -10;
+            }
+        }
+    }
+    // Check diagonal L to R
+    if (board[0][0] == board[1][1] && board[1][1] == board[2][2]) {
+        if (board[0][0] == player) {
+            return 10;
+        } else if (board[0][0] == opponent) {
+            return -10;
+        }
+    }
+    // Check diagonal R to L
+    if (board[0][2] == board[1][1] && board[1][1] == board[2][0]) {
+        if (board[0][2] == player) {
+            return 10;
+        } else if (board[0][2] == opponent) {
+            return -10;
+        }
+    }
+    return 0;
+}
+
+function minimax(gameObj,depth,isMax) {
+    var board = gameObj.board;
+
+    var player = gameObj.player_1_symbol;
+    var opponent = gameObj.player_2_symbol;
+
+    let score = evaluate(gameObj);
+    if (score==10) {
+        return score;
+    }
+    if (score == -10) {
+        return score;
+    }
+    if (!isMovesLeft(gameObj)) {
+        return 0;
+    }
+    if (isMax) {
+        let best = -1000;
+        for (let i = 0;i<3;i++) {
+            for (let j = 0;j<3;j++) {
+                if (board[i][j] == "-") {
+                    board[i][j] = player;
+
+                    best = Math.max(best,minimax(gameObj,depth+1,!isMax))
+
+                    board[i][j] = "-";
+
+                }
+            }
+        }
+        return best;
+    } else {
+        let best = 1000;
+        for (let i = 0;i<3;i++) {
+            for (let j = 0;j<3;j++) {
+                if (board[i][j] == "-") {
+                    board[i][j] = opponent;
+                    best = Math.min(best,minimax(gameObj,depth+1,!isMax));
+                    board[i][j] = "-";
+                }
+            }
+        }
+        return best;
+    }
+}
+
+function bestMove(gameObj) {
+    var board = gameObj.board;
+    var player = gameObj.player_1_symbol;
+
+    let bestVal = -1000;
+    let bestMove = {x:-1,y:-1};
+
+    for (let i = 0;i<3;i++) {
+        for (let j = 0;j<3;j++) {
+            if (board[i][j] == "-") {
+                board[i][j] = player;
+                let moveVal = minimax(gameObj,0,false);
+                board[i][j] = "-";
+
+                if (moveVal>bestVal) {
+                    bestMove.x = j;
+                    bestMove.y = i;
+                    bestVal = moveVal;
+                }
+            }
+        }
+    }
+    return bestMove
+}
+
 bot.onText(/[123456789XOxo]/g,(msg,match)=>{
     const chatId = msg.chat.id;
     if (gameObjList.length!=0) {
@@ -315,11 +443,13 @@ Player 2's symbol - ${gameObjList[i].player_2_symbol}`)
                                 if (canContinue) {
                                     var rx = Math.floor(Math.random()*3);
                                     var ry = Math.floor(Math.random()*3);
+                                    var bestPos = {x:2,y:2}
                                     if (!gameObjList[i].checkIfAllAreFull()) {
                                         while (gameObjList[i].board[ry][rx]!="-") {
                                             rx = Math.floor(Math.random()*3);
                                             ry = Math.floor(Math.random()*3);
                                         }
+                                        var bestPos = bestMove(gameObjList[i]);
                                     } else {
                                         gameObjList[i].printBoard(chatId,bot);
                                         bot.sendMessage(chatId,"*𝐈𝐭'𝐬 𝐚 𝐭𝐢𝐞!*\n-----\n Thanks for playing my Tic Tac Toe game!\n-----\n Github Project Link: https://github.com/pixelhypercube/Telegram-Tic-Tac-Toe \n-----\n Type /start again to start a new game!",{
@@ -334,9 +464,17 @@ Player 2's symbol - ${gameObjList[i].player_2_symbol}`)
                                         canContinue = false;
                                     }
                                     if (canContinue) {
-                                        gameObjList[i].setCell(rx,ry,gameObjList[i].player_2_symbol);
+                                    
+                                        // Stating probability between minimax or bestPos
+                                        var probability = Math.random();
+                                        if (probability<0.8) {
+                                            gameObjList[i].setCell(bestPos.x,bestPos.y,gameObjList[i].player_2_symbol);
+                                        } else {
+                                            gameObjList[i].setCell(rx,ry,gameObjList[i].player_2_symbol);
+                                        }
                                         gameObjList[i].printBoard(chatId,bot);
                                     }
+                                    // console.log(gameObjList[i].board[0][0]==gameObjList[i].board[0][1] && gameObjList[i].board[0][1] == gameObjList[i].board[0][2])
                                     if (gameObjList[i].checkWin()) {
                                         bot.sendMessage(chatId,"*𝐂𝐏𝐔 𝐰𝐨𝐧 𝐭𝐡𝐞 𝐠𝐚𝐦𝐞!*\n-----\n Thanks for playing my Tic Tac Toe game!\n-----\n Github Project Link: https://github.com/pixelhypercube/Telegram-Tic-Tac-Toe \n-----\n Type /start again to start a new game!",{
                                             'reply_markup':{
